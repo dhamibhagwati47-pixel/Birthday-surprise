@@ -26,7 +26,7 @@ body {
 /* Button center */
 button {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   
@@ -40,14 +40,22 @@ button {
   box-shadow: 0 0 15px rgba(255,255,255,0.6);
 }
 
-/* Messages bottom */
+/* Message box (scrollable) */
 #message {
   position: absolute;
-  bottom: 20px;
-  width: 100%;
-  padding: 0 20px;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-height: 35vh;
+  overflow-y: auto;
   font-size: 20px;
   line-height: 1.6;
+}
+
+/* spacing between lines */
+#message p {
+  margin: 8px 0;
 }
 
 /* Fade animation */
@@ -90,20 +98,20 @@ button {
 let messages = [
 "Happy Birthday my love ❤️",
 "I wish I could be there with you today 🥺",
-"From our first moment....to now, everything feels so special💖",
-"All the time we've spent together is my favorite part of life.",
-"I miss your hugs and kisses more than anything 🤗",
+"Every moment feels incomplete without you 💔",
+"I miss your hugs more than anything 🤗",
+"No matter how far we are… you are always with me 💖",
+"You are not just my love… you are my home 🏡❤️",
 "I close my eyes and feel you right beside me 🥹",
 "Distance is hard… but loving you is the easiest thing 💕",
 "I can't wait to hold you again 😔❤️",
-"Thank you for loving me the way you do❤️", 
 "Till then… all my love is right here for you 💌",
 "I LOVE YOU FOREVER ❤️"
 ];
 
 let index = 0;
 
-// soft music
+// slow music
 document.getElementById("bgMusic").volume = 0.2;
 
 function showMessage() {
