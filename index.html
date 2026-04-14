@@ -23,31 +23,38 @@ body {
   background-attachment: fixed;
 }
 
-/* Button center */
+/* ❤️ Button (heartbeat + top position) */
 button {
   position: absolute;
-  top: 10%;
-  left: 30%;
+  top: 20%;
+  left: 50%;
   transform: translate(-50%, -50%);
   
   padding: 15px 30px;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 30px;
   border: none;
   background: white;
   color: #ff4d88;
   cursor: pointer;
   box-shadow: 0 0 15px rgba(255,255,255,0.6);
+
+  animation: beat 1.2s infinite;
 }
 
-/* Message box (scrollable) */
+@keyframes beat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* 💌 Messages just below button */
 #message {
   position: absolute;
-  top: 55%;
+  top: 28%;
   left: 50%;
-  transform: translateX(-50%, -50%);
-  width: 85%;
-  max-height: 40vh;
+  transform: translateX(-50%);
+  width: 90%;
+  max-height: 60vh;
   overflow-y: auto;
   font-size: 20px;
   line-height: 1.6;
@@ -56,10 +63,10 @@ button {
 
 /* spacing between lines */
 #message p {
-  margin: 8px 0;
+  margin: 6px 0;
 }
 
-/* Fade animation */
+/* fade animation */
 .fade {
   animation: fadeIn 1s ease;
 }
@@ -69,7 +76,7 @@ button {
   to {opacity: 1; transform: translateY(0);}
 }
 
-/* Floating hearts */
+/* floating hearts */
 .heart {
   position: fixed;
   bottom: -10px;
@@ -90,7 +97,7 @@ button {
 
 <div id="message"></div>
 
-<!-- Music -->
+<!-- 🎵 Music -->
 <audio id="bgMusic" autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
 </audio>
@@ -98,21 +105,21 @@ button {
 <script>
 let messages = [
 "Happy Birthday my love ❤️",
-"I wish I could be there with you today 🥺",
-"Every moment feels incomplete without you 💔",
-"I miss your hugs more than anything 🤗",
-"No matter how far we are… you are always with me 💖",
-"You are not just my love… you are my home 🏡❤️",
-"I close my eyes and feel you right beside me 🥹",
-"Distance is hard… but loving you is the easiest thing 💕",
-"I can't wait to hold you again 😔❤️",
-"Till then… all my love is right here for you 💌",
+"From our first moment… everything feels special 🥰",
+"All the time we’ve spent together means everything to me 💖",
+"You make even the simplest days feel magical ✨",
+"I love our laughs, our talks… everything about us ❤️",
+"You understand me like no one else 🥹",
+"Being with you feels so easy and right 💕",
+"I see my future… and it has you in it 💖",
+"There’s so much more I want to live with you ❤️",
+"And I’ll keep choosing you… every single day 💞",
 "I LOVE YOU FOREVER ❤️"
 ];
 
 let index = 0;
 
-// slow music
+// 🎵 soft volume
 document.getElementById("bgMusic").volume = 0.2;
 
 function showMessage() {
