@@ -11,10 +11,14 @@ body {
   overflow-x: hidden;
   color: white;
 
-  /* Soft animated gradient background */
-  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ee9ca7);
-  background-size: 400% 400%;
-  animation: gradientBG 10s ease infinite;
+  /* Background image + gradient overlay */
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url("YOUR_IMAGE_LINK_HERE");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @keyframes gradientBG {
