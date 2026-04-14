@@ -10,8 +10,8 @@ body {
   font-family: 'Segoe UI', sans-serif;
   color: white;
 
-  min-height: 100vh;        /* full page but flexible */
-  overflow-y: auto;         /* allow scrolling */
+  min-height: 100vh;
+  overflow-y: auto;
 
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ button {
   50% { transform: scale(1.08); }
 }
 
-/* 💌 Messages (no limit now) */
+/* 💌 Messages */
 #message {
   margin-top: 20px;
   width: 90%;
@@ -57,7 +57,6 @@ button {
   line-height: 1.6;
 }
 
-/* spacing */
 #message p {
   margin: 8px 0;
 }
@@ -89,12 +88,12 @@ button {
 
 <body>
 
-<button onclick="showMessage()">This is all my love for you… tap ❤️</button>
+<button onclick="startExperience()">This is all my love for you… tap ❤️</button>
 
 <div id="message"></div>
 
 <!-- 🎵 Music -->
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
 </audio>
 
@@ -110,4 +109,47 @@ let messages = [
 "I see my future… and it has you in it 💖",
 "There’s so much more I want to live with you ❤️",
 "And I’ll keep choosing you… every single day 💞",
-"I LOVE YOU FOREVER ❤️
+"I LOVE YOU FOREVER ❤️"
+];
+
+let index = 0;
+
+// 🎵 start experience (tap pe music + first message)
+function startExperience() {
+  let music = document.getElementById("bgMusic");
+  music.play();
+  music.volume = 0.2;
+
+  showMessage();
+}
+
+// messages
+function showMessage() {
+  if (index < messages.length) {
+    let msg = document.createElement("p");
+    msg.className = "fade";
+    msg.innerText = messages[index];
+    document.getElementById("message").appendChild(msg);
+
+    createHearts();
+    index++;
+  }
+}
+
+// hearts
+function createHearts() {
+  for (let i = 0; i < 4; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }
+}
+</script>
+
+</body>
+</html>
