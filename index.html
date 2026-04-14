@@ -7,15 +7,15 @@
 body {
   text-align: center;
   font-family: Arial;
-  background: linear-gradient(to right, #ff9a9e, #fad0c4);
-  margin-top: 100px;
-  color: #fff;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  margin-top: 80px;
+  color: white;
 }
 
 button {
-  padding: 15px 25px;
-  font-size: 18px;
-  border-radius: 20px;
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 30px;
   border: none;
   background: white;
   color: #ff4d88;
@@ -23,13 +23,8 @@ button {
 
 #message {
   margin-top: 30px;
-  font-size: 24px;
-  animation: fade 1s;
-}
-
-@keyframes fade {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  font-size: 22px;
+  line-height: 1.6;
 }
 </style>
 </head>
@@ -37,37 +32,31 @@ button {
 <body>
 
 <h2>Click for your surprise ❤️</h2>
-<button onclick="showMessage()">Click</button>
+<button onclick="showMessage()">Tap Me 💖</button>
 
 <div id="message"></div>
-
-<!-- Background Music -->
-<audio id="bgMusic" autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
-</audio>
 
 <script>
 let messages = [
 "Happy Birthday my love ❤️",
-"I miss you so much today 🥺",
-"Distance can't reduce my love 💕",
-"I wish I was there with you 😔",
+"I miss you so much 🥺",
+"I wish I could hug you right now 🤗",
+"Distance can't change my love 💕",
 "You are always in my heart 💖",
-"I can't wait to hug you 🤗",
+"I can't wait to see you 😔",
 "You are my everything ❤️",
-"My love grows stronger every day 🌸",
-"Soon we will celebrate together 🎂",
-"I love you forever ❤️"
+"My love grows every day 🌸",
+"Soon we’ll celebrate together 🎂",
+"I LOVE YOU FOREVER ❤️"
 ];
 
 let index = 0;
 
 function showMessage() {
   if (index < messages.length) {
-    document.getElementById("message").innerText = messages[index];
+    document.getElementById("message").innerHTML += 
+      "<p>" + messages[index] + "</p>";
     index++;
-  } else {
-    document.getElementById("message").innerText = "Forever yours ❤️";
   }
 }
 </script>
