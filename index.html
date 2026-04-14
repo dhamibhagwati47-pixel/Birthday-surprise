@@ -6,35 +6,84 @@
 <style>
 body {
   text-align: center;
-  font-family: Arial;
-  background: linear-gradient(to right, #ff758c, #ff7eb3);
-  margin-top: 80px;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
   color: white;
+
+  /* Soft animated gradient background */
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #ee9ca7);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
 }
 
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* Heading */
+h2 {
+  margin-top: 80px;
+}
+
+/* Button */
 button {
   padding: 15px 30px;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 30px;
   border: none;
   background: white;
   color: #ff4d88;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255,255,255,0.6);
 }
 
+/* Messages */
 #message {
   margin-top: 30px;
   font-size: 22px;
-  line-height: 1.6;
+  line-height: 1.8;
+  padding: 0 20px;
+}
+
+/* Fade in */
+.fade {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  font-size: 18px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(0); opacity:1;}
+  100% {transform: translateY(-100vh); opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-<h2>Click for your surprise ❤️</h2>
+<h2>Tap for your surprise ❤️</h2>
 <button onclick="showMessage()">Tap Me 💖</button>
 
 <div id="message"></div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop autoplay>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
 
 <script>
 let messages = [
@@ -45,18 +94,40 @@ let messages = [
 "You are always in my heart 💖",
 "I can't wait to see you 😔",
 "You are my everything ❤️",
-"My love grows every day 🌸",
+"My love grows stronger every day 🌸",
 "Soon we’ll celebrate together 🎂",
 "I LOVE YOU FOREVER ❤️"
 ];
 
 let index = 0;
 
+// set low volume
+document.getElementById("bgMusic").volume = 0.2;
+
 function showMessage() {
   if (index < messages.length) {
-    document.getElementById("message").innerHTML += 
-      "<p>" + messages[index] + "</p>";
+    let msg = document.createElement("p");
+    msg.className = "fade";
+    msg.innerText = messages[index];
+    document.getElementById("message").appendChild(msg);
+
+    createHearts();
     index++;
+  }
+}
+
+function createHearts() {
+  for (let i = 0; i < 4; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 2) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
   }
 }
 </script>
