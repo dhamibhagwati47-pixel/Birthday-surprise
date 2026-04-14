@@ -11,8 +11,8 @@ body {
   overflow-x: hidden;
   color: white;
 
-  /* Background image + gradient overlay */
-  background: 
+  /* Background photo + fade */
+  background:
     linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
     url("https://raw.githubusercontent.com/dhamibhagwati47-pixel/Birthday-surprise/main/photo.jpeg");
 
@@ -21,19 +21,9 @@ body {
   background-repeat: no-repeat;
 }
 
-@keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-/* Heading */
-h2 {
-  margin-top: 80px;
-}
-
 /* Button */
 button {
+  margin-top: 80px;
   padding: 15px 30px;
   font-size: 18px;
   border-radius: 30px;
@@ -52,7 +42,7 @@ button {
   padding: 0 20px;
 }
 
-/* Fade in */
+/* Fade animation */
 .fade {
   animation: fadeIn 1s ease;
 }
@@ -79,13 +69,12 @@ button {
 
 <body>
 
-<h2>Tap for your surprise ❤️</h2>
-<button onclick="showMessage()">Tap Me 💖</button>
+<button onclick="showMessage()">Tap for your surprise ❤️</button>
 
 <div id="message"></div>
 
-<!-- Background Music -->
-<audio id="bgMusic" loop autoplay>
+<!-- Music -->
+<audio id="bgMusic" autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
 </audio>
 
@@ -105,7 +94,7 @@ let messages = [
 
 let index = 0;
 
-// set low volume
+// slow volume
 document.getElementById("bgMusic").volume = 0.2;
 
 function showMessage() {
