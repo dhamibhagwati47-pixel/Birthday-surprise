@@ -9,7 +9,6 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   color: white;
-
   min-height: 100vh;
   overflow-y: auto;
 
@@ -37,7 +36,6 @@ button {
   color: #ff4d88;
   cursor: pointer;
   box-shadow: 0 0 15px rgba(255,255,255,0.6);
-
   animation: beat 1.2s infinite;
 }
 
@@ -50,103 +48,115 @@ button {
 #message {
   margin-top: 20px;
   width: 90%;
-  max-width: 600px;
+  max-width: 650px;
   text-align: center;
-
   font-size: clamp(16px, 4vw, 20px);
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 #message p {
-  margin: 8px 0;
+  margin: 10px 0;
 }
 
-/* fade */
 .fade {
-  animation: fadeIn 1s ease;
+  animation: fadeIn 1.2s ease;
 }
 
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(10px);}
+  from {opacity: 0; transform: translateY(15px);}
   to {opacity: 1; transform: translateY(0);}
 }
 
-/* ❤️ hearts */
+/* ❤️ floating hearts */
 .heart {
   position: fixed;
   bottom: -10px;
-  font-size: 18px;
-  animation: floatUp 6s linear infinite;
+  font-size: 20px;
+  animation: floatUp linear forwards;
 }
 
 @keyframes floatUp {
-  0% {transform: translateY(0); opacity:1;}
-  100% {transform: translateY(-100vh); opacity:0;}
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<button onclick="startExperience()">This is all my love for you… Tap ❤️</button>
+<button id="loveBtn" onclick="startExperience()">This is all my love for you… Tap ❤️</button>
 
 <div id="message"></div>
 
-<!-- 🎵 Music -->
 <audio id="bgMusic" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
 </audio>
 
 <script>
 let messages = [
-"Happy Birthday my love ❤️🎂",
-"Even though we are miles apart, you are always in my heart 💖🌍",
-"I keep thinking about all our beautiful moments together 🥺✨",
-"All the time we’ve spent together means everything to me, I love your smile, our laughs, our talks, our hugs, our kisses everything about us ❤️",
-"Distance can never reduce the love I feel for you 💕🔥, I miss you more with each passing day 😔💭",
-"I can’t wait to be with you and create more memories together 😘🎶",
-"I dream of celebrating all your future birthdays together by your side 🏡🎂",
-"Love you endlessly… Happy Birthday once again ❤️🎉❤️"
-
-  "Yours Bhagwati"
+  "Happy Birthday my love ❤️🎂",
+  "Even though we are miles apart, you are always in my heart 💖🌍",
+  "I keep thinking about all our beautiful moments together 🥺✨",
+  "All the time we’ve spent together means everything to me ❤️",
+  "Distance can never reduce the love I feel for you 💕",
+  "I can’t wait to be with you and create more memories together 😘",
+  "I dream of celebrating all your future birthdays together 🏡🎂",
+  "Love you endlessly… Happy Birthday once again ❤️🎉",
+  "Yours Bhagwati ❤️"
 ];
 
 let index = 0;
+let heartInterval;
 
-// 🎵 start experience (tap pe music + first message)
+// Start all
 function startExperience() {
+  document.getElementById("loveBtn").style.display = "none";
+
   let music = document.getElementById("bgMusic");
-  music.play();
   music.volume = 0.2;
+  music.play();
 
-  showMessage();
+  // hearts every 500ms
+  heartInterval = setInterval(createHearts, 500);
+
+  // messages every 3 seconds
+  let msgInterval = setInterval(() => {
+    if (index < messages.length) {
+      showMessage();
+    } else {
+      clearInterval(msgInterval);
+      clearInterval(heartInterval);
+    }
+  }, 3000);
 }
 
-// messages
+// show one message
 function showMessage() {
-  if (index < messages.length) {
-    let msg = document.createElement("p");
-    msg.className = "fade";
-    msg.innerText = messages[index];
-    document.getElementById("message").appendChild(msg);
-
-    createHearts();
-    index++;
-  }
+  let msg = document.createElement("p");
+  msg.className = "fade";
+  msg.innerText = messages[index];
+  document.getElementById("message").appendChild(msg);
+  index++;
 }
 
-// hearts
+// create hearts
 function createHearts() {
-  for (let i = 0; i < 4; i++) {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 2) + "s";
-    document.body.appendChild(heart);
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 6000);
-  }
+  setTimeout(() => {
+    heart.remove();
+  }, 7000);
 }
 </script>
 
